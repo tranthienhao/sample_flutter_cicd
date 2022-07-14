@@ -36,14 +36,3 @@ jobs:
       - name: Build APK
         working-directory: ${{ github.workspace }}
         run: flutter build apk
-      - name: Create Firebase Service Credentials file
-        run: |
-          echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
-          base64 -d -i firebase_credentials.json.b64 > "${{ github.workspace }}/android/firebase_credentials.json"
-        env:
-          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
-      - name: Distribute Android App To Firebase
-        working-directory: ${{ github.workspace }}/android
-        run: bundle exec fastlane distribute_android_app
-        env:
-          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
