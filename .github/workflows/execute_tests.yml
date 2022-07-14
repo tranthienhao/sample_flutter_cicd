@@ -1,0 +1,29 @@
+name: Execute tests
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions: read-all
+jobs:
+  unit_test:
+    name: Unit tests on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, windows-2019, macos-10.15]
+    steps:
+      # Set up Flutter.
+      - name: Clone Flutter repository with master channel
+        uses: subosito/flutter-action@d8687e6979e8ef66d2b2970e2c92c1d8e801d7bf
+        with:
+          channel: master
+      - run: flutter doctor -v
+
+      # Analyze, check formatting, and run unit tests.
+      - run: flutter analyze
+      - name: Ensure the Dart code is formatted correctly
+        run: flutter format --set-exit-if-changed --dry-run .
+      - name: Run Flutter unit tests
+        run: flutter test
