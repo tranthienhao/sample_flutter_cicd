@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-latest]
     steps:
       # Set up Flutter.
       - name: Clone Flutter repository with master channel
@@ -26,4 +26,5 @@ jobs:
       - name: Ensure the Dart code is formatted correctly
         run: flutter format --set-exit-if-changed --dry-run .
       - name: Run Flutter unit tests
+        run: pwd
         run: flutter test
