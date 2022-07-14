@@ -1,25 +1,30 @@
-name: Dart CI
-
+name: Execute tests
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    branches: master
 
+permissions: read-all
 jobs:
-  lint_test:
-    # This job will run on ubuntu virtual machine
-    runs-on: macos-latest
+  unit_test:
+    name: Unit tests on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
     steps:
+      # Set up Flutter.
       - uses: actions/checkout@v1
-      # Setup Java environment in order to build the Android app.
-      # - uses: actions/setup-java@v1
-      #   with:
-      #     java-version: '12.x'
-
-      # Setup the flutter environment.
-      - uses: subosito/flutter-action@v2
+      - name: Clone Flutter repository with master channel
+        uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-      # Get flutter dependencies.
-      - run: flutter pub get
+      - run: flutter doctor -v
+
+      # Analyze, check formatting, and run unit tests.
       - run: flutter analyze
-      - run: flutter test
+      - name: Ensure the Dart code is formatted correctly
+        run: flutter format --set-exit-if-changed --dry-run .
+      - name: Run Flutter unit tests
+        run: flutter test
