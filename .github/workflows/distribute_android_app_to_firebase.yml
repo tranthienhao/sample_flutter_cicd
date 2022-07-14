@@ -6,7 +6,6 @@ on:
   pull_request:
 
 jobs:
-  needs: unit_test
   build_apk:
     runs-on: macos-latest
     steps:
