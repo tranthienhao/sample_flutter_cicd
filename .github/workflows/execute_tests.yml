@@ -1,4 +1,4 @@
-name: Execute tests
+name: Lint & unit tests
 on:
   push:
     branches:
@@ -12,9 +12,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-latest]
     steps:
       # Set up Flutter.
+      - uses: actions/checkout@v1
       - name: Clone Flutter repository with master channel
         uses: subosito/flutter-action@v2
         with:

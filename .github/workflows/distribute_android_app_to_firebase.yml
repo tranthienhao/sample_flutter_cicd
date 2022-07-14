@@ -3,10 +3,9 @@ on:
   push:
     branches:
       - master
-  pull_request:
 
 jobs:
-  build_apk:
+  distribute_apk:
     runs-on: macos-latest
     steps:
       - name: Checkout code
@@ -14,11 +13,10 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: "8"
+          java-version: "11"
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.0.4"
           channel: "stable"
       - name: Install Android Gems
         working-directory: ${{ github.workspace }}/android
@@ -30,12 +28,12 @@ jobs:
         run: echo "${{ secrets.KEYSTORE }}" | base64 --decode > ${{ github.workspace }}/android/app.jks
       - name: Set up key.properties
         working-directory: ${{ github.workspace }}
+        env:
+          PROPERTIES_PATH: "${{ github.workspace }}/android/key.properties"
         run: |
           echo keyPassword=\${{ secrets.SIGNING_STORE_PASSWORD }} > ${{env.PROPERTIES_PATH}}
           echo storePassword=\${{ secrets.SIGNING_KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.SIGNING_KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
-        env:
-        PROPERTIES_PATH: "${{ github.workspace }}/android/key.properties"
       - name: Build APK
         working-directory: ${{ github.workspace }}
         run: flutter build apk
@@ -47,6 +45,6 @@ jobs:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
       - name: Distribute Android Beta App
         working-directory: ${{ github.workspace }}/android
-        run: bundle exec fastlane distribute_android_app
+        run: fastlane distribute_android_app
         env:
           FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}

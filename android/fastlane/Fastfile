@@ -20,8 +20,8 @@ platform :android do
   lane :distribute_android_app do
     firebase_app_distribution(
       app: ENV["FIREBASE_APP_ID_ANDROID"],
-      groups: "Testers"
-      release_notes_file: "Distribute Android App to Firebase",
+      groups: "Testers",
+      release_notes: "Distribute Android App to Firebase",
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
       service_credentials_file: "firebase_credentials.json"
