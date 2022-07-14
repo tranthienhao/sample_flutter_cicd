@@ -1,4 +1,4 @@
-name: Execute tests
+name: Lint & unit tests
 on:
   push:
     branches:
