@@ -43,6 +43,8 @@ jobs:
       - name: Increment Android Version Code
         working-directory: ${{ github.workspace }}/android
         run: fastlane increment_android_version_code
+        env:
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
       - name: Build APK
         working-directory: ${{ github.workspace }}
         run: flutter build apk
