@@ -23,7 +23,10 @@ platform :android do
       service_credentials_file: "firebase_credentials.json"
     )
     new_version_code = latest_release[:buildVersion].to_i + 1
-    increment_version_code({ version_code: new_version_code })
+    increment_version_code({ 
+      version_code: new_version_code, 
+      ext_constant_name: "androidVersionCode" 
+    })
   end
   desc "Distribute Android App to Firebase"
   lane :distribute_android_app do
