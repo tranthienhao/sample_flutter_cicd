@@ -22,7 +22,6 @@ platform :android do
       app: ENV["FIREBASE_APP_ID_ANDROID"],
       service_credentials_file: "firebase_credentials.json"
     )
-    if latest_release 
     new_version_code = latest_release[:buildVersion].to_i + 1
     increment_version_code({ version_code: new_version_code })
   end
