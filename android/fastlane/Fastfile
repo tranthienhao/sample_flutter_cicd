@@ -16,6 +16,16 @@
 default_platform(:android)
 
 platform :android do
+  desc "Increse Android version code"
+  lane :increment_android_version_code do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: ENV["FIREBASE_APP_ID_ANDROID"],
+      service_credentials_file: "firebase_credentials.json"
+    )
+    if latest_release 
+    new_version_code = latest_release[:buildVersion].to_i + 1
+    increment_version_code({ version_code: new_version_code })
+  end
   desc "Distribute Android App to Firebase"
   lane :distribute_android_app do
     firebase_app_distribution(
