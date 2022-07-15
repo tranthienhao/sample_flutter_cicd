@@ -53,3 +53,4 @@ jobs:
         run: fastlane distribute_android_app
         env:
           FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
