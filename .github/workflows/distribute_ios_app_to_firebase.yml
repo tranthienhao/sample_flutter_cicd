@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+    pull_request:
 
 jobs:
   distribute_ipa:
@@ -35,7 +36,7 @@ jobs:
       - name: Create Firebase Service Credentials file
         run: |
           echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
-          base64 -d -i firebase_credentials.json.b64 > "${{ github.workspace }}//ios/firebase_credentials.json"
+          base64 -d -i firebase_credentials.json.b64 > "${{ github.workspace }}/ios/firebase_credentials.json"
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
       - name: Build IPA
