@@ -39,6 +39,11 @@ jobs:
           base64 -d -i firebase_credentials.json.b64 > "${{ github.workspace }}/ios/firebase_credentials.json"
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+      - name: Increment iOS build number
+        working-directory: ${{ github.workspace }}/ios
+        run: fastlane increment_ios_build_number
+        env:
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
       - name: Build IPA
         working-directory: ${{ github.workspace }}
         run: flutter build ipa --export-options-plist=ios/ExportOptions.plist
