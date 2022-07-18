@@ -51,3 +51,4 @@ jobs:
         run: fastlane distribute_ios_app
         env:
           FIREBASE_APP_ID_IOS: ${{ secrets.FIREBASE_APP_ID_IOS }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
