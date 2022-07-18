@@ -50,7 +50,7 @@ platform :ios do
     ensure_temp_keychain(keychain_name, keychain_password)
 
     match(
-        type: 'development',
+        type: 'adhoc',
         app_identifier: "com.example.flutterCicdRino",
         git_basic_authorization: Base64.strict_encode64(ENV["REPO_AUTHORIZATION"]),
         keychain_name: keychain_name,
