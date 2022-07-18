@@ -35,9 +35,14 @@ jobs:
       - name: Create Firebase Service Credentials file
         run: |
           echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
-          base64 -d -i firebase_credentials.json.b64 > "${{ github.workspace }}//ios/firebase_credentials.json"
+          base64 -d -i firebase_credentials.json.b64 > "${{ github.workspace }}/ios/firebase_credentials.json"
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+      - name: Increment iOS build number
+        working-directory: ${{ github.workspace }}/ios
+        run: fastlane increment_ios_build_number
+        env:
+          FIREBASE_APP_ID_IOS: ${{ secrets.FIREBASE_APP_ID_IOS }}
       - name: Build IPA
         working-directory: ${{ github.workspace }}
         run: flutter build ipa --export-options-plist=ios/ExportOptions.plist
@@ -46,3 +51,4 @@ jobs:
         run: fastlane distribute_ios_app
         env:
           FIREBASE_APP_ID_IOS: ${{ secrets.FIREBASE_APP_ID_IOS }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}

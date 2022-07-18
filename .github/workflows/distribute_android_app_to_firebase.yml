@@ -7,6 +7,7 @@ on:
 jobs:
   distribute_apk:
     runs-on: macos-latest
+    environment: master
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
