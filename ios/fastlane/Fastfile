@@ -19,9 +19,9 @@ platform :ios do
   desc "Distribute iOS App to Firebase"
   lane :install_certificate_and_profile do
     api_key = app_store_connect_api_key(
-        key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
-        issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
-        key_content: ENV["APP_STORE_CONNECT_KEY_CONTENT"],
+        key_id: "ASL46X8388",
+        issuer_id: "0c953f68-5e58-442a-905e-0efa751dda3f",
+        key_content: "-----BEGIN PRIVATE KEY-----\\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQglfFdGzu7puBTIrqAXJGcY/yzQg6OVAu022cCO10rohKgCgYIKoZIzj0DAQehRANCAAQohESkwkVUTDv37j9XLMFZY6TbqEWNWYEL/yoiz6oskV5UUg44BD7GBzCOm3ExorLpVwJmgkmdJoLNU6uAY6D1\\n-----END PRIVATE KEY-----",
         in_house: false,
     )
     # keychain_name = ENV["TEMP_KEYCHAIN_USER"]
