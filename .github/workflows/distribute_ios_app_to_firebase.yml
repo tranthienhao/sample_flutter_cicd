@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
 
 jobs:
   distribute_ipa:
@@ -43,7 +42,7 @@ jobs:
         working-directory: ${{ github.workspace }}/ios
         run: fastlane increment_ios_build_number
         env:
-          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
+          FIREBASE_APP_ID_IOS: ${{ secrets.FIREBASE_APP_ID_IOS }}
       - name: Build IPA
         working-directory: ${{ github.workspace }}
         run: flutter build ipa --export-options-plist=ios/ExportOptions.plist
