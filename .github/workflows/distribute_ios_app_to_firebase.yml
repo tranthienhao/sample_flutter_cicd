@@ -30,6 +30,7 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_KEY_CONTENT }}
           TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
+          REPO_AUTHORIZATION: ${{ secrets.REPO_AUTHORIZATION }}
       - name: Create Firebase Service Credentials file
         run: |
           echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
