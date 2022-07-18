@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+   <key>teamID</key>
+   <string>AVW4UCPVKL</string>
+   <key>compileBitcode</key>
+    <false/>
+   <key>signingStyle</key>
+   <string>manual</string>
+   <key>method</key>
+    <string>adhoc</string>
+   <key>signingCertificate</key>
+   <string>Apple Distribution: Trung Thanh Nguyen</string>
+   <key>provisioningProfiles</key>
+   <dict>
+      <key>com.example.flutterCicdRino</key>
+      <string>match AdHoc com.example.flutterCicdRino 1658126704</string>
+   </dict>
+   <key>thinning</key>
+    <string>&lt;none&gt;</string>
+</dict>
+</plist>
